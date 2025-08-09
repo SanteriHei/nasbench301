@@ -7,7 +7,8 @@ Note: 'string {}'.format(arg) used to keep backward compatibility
 import os
 import sys
 from zipfile import ZipFile
-
+import pathlib
+import argparse
 import requests
 from tqdm import tqdm
 
@@ -74,18 +75,22 @@ def download_models(version, delete_zip=True,
             os.remove(zip_path)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--version", choices=["0.9", "1.0"], default="1.0") 
+    parser.add_argument("--download_dir", type=pathlib.Path, default=pathlib.Path.cwd())
+    args = parser.parse_args()
     # Parse args
     # Note: Would probably be easier to use a lib for this
     #       Also doesn't give a download arg this way
-    version = '1.0'  # default to use 1.0
-    if len(sys.argv) == 2:
-        if version not in ('0.9', '1.0'):
-            print('Usage: python {} {}'.format(sys.argv[0], '[0.9 | 1.0]'))
-            sys.exit(1)
-        else:
-            version = '0.9' if sys.argv[1] == '0.9' else '1.0'
-
-    elif len(sys.arv) > 2:
-        print('Usage: python {} {}'.format(sys.argv[0], '[0.9 | 1.0]'))
-        sys.exit(1)
-    download_models(version, delete_zip=True)
+    # version = '1.0'  # default to use 1.0
+    # if len(sys.argv) == 2:
+    #     if version not in ('0.9', '1.0'):
+    #         print('Usage: python {} {}'.format(sys.argv[0], '[0.9 | 1.0]'))
+    #         sys.exit(1)
+    #     else:
+    #         version = '0.9' if sys.argv[1] == '0.9' else '1.0'
+    #
+    # elif len(sys.arv) > 2:
+    #     print('Usage: python {} {}'.format(sys.argv[0], '[0.9 | 1.0]'))
+    #     sys.exit(1)
+    download_models(args.version, delete_zip=True, download_dir=args.download_dir)

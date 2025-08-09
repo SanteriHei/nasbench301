@@ -16,8 +16,8 @@ from scipy.stats import norm, spearmanr, kendalltau
 from sklearn.metrics import mean_squared_error, r2_score
 from tqdm import tqdm
 
-from nasbench301.surrogate_models.bananas.bananas import BANANASModel
-from nasbench301.surrogate_models.gnn.gnn import GNNSurrogateModel
+#from nasbench301.surrogate_models.bananas.bananas import BANANASModel
+#from nasbench301.surrogate_models.gnn.gnn import GNNSurrogateModel
 from nasbench301.surrogate_models.gradient_boosting.lgboost import LGBModel, LGBModelTime
 from nasbench301.surrogate_models.gradient_boosting.xgboost import XGBModel, XGBModelTime
 from nasbench301.surrogate_models.random_forrest.sklearn_forest import SklearnForest
@@ -31,13 +31,13 @@ model_dict = {
     # NOTE: RUNTIME MODELS SHOULD END WITH "_time"
 
     # Graph Convolutional Neural Networks
-    'gnn_gin': partial(GNNSurrogateModel, gnn_type='gnn_gin'),
-    'gnn_diff_pool': partial(GNNSurrogateModel, gnn_type='gnn_diff_pool'),
-    'gnn_deep_multisets': partial(GNNSurrogateModel, gnn_type='gnn_deep_multisets'),
-    'gnn_vs_gae': partial(GNNSurrogateModel, gnn_type='gnn_vs_gae'),
-    'gnn_vs_gae_classifier': partial(GNNSurrogateModel, gnn_type='gnn_vs_gae_classifier'),
-    'deeper_gnn': partial(GNNSurrogateModel, gnn_type='deeper_gnn'),
-    'bananas': BANANASModel,
+    #'gnn_gin': partial(GNNSurrogateModel, gnn_type='gnn_gin'),
+    #'gnn_diff_pool': partial(GNNSurrogateModel, gnn_type='gnn_diff_pool'),
+    #'gnn_deep_multisets': partial(GNNSurrogateModel, gnn_type='gnn_deep_multisets'),
+    #'gnn_vs_gae': partial(GNNSurrogateModel, gnn_type='gnn_vs_gae'),
+    #'gnn_vs_gae_classifier': partial(GNNSurrogateModel, gnn_type='gnn_vs_gae_classifier'),
+    #'deeper_gnn': partial(GNNSurrogateModel, gnn_type='deeper_gnn'),
+    #'bananas': BANANASModel,
 
     # Baseline methods
     #'random_forest': RandomForest,
