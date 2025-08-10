@@ -269,25 +269,87 @@ class ConfigLoader:
         :param path:
         :return:
         """
+        def _find_idx(name: str, hyperparameters):
+            idx = -1
+            for i, hp in enumerate(hyperparameters):
+                if hp["name"] == name:
+                    return i
+            return idx
+
+
         with open(os.path.join(path), 'r') as fh:
-            json_string = fh.read()
-            config_space = config_space_json_r_w.read(json_string)
+            config = json.load(fh)
+
+            # json_string = fh.read()
+            # config_space = config_space_json_r_w.read(json_string)
+        import pprint
+        pprint.pp(config, indent=4)
+        
+
+        # Overrride constant hyperparameters for num_layers, init_channels and  annealing
+        idx = _find_idx("NetworkSelectorDatasetInfo:darts:layers", config["hyperparameters"])
+        assert idx > 0, "Could not find NetworkSelectorDatasetInfo:darts:layers"
+        config["hyperparameters"].pop(idx)
+         
+        config["hyperparameters"].append({
+                "name": "NetworkSelectorDatasetInfo:darts:layers",
+                "lower": 1,
+                "upper": 100000,
+                "type": "uniform_int"
+        })
+
+
+        idx = _find_idx("SimpleLearningrateSchedulerSelector:cosine_annealing:T_max", config["hyperparameters"])
+        assert idx > 0, "Could not find SimpleLearningrateSchedulerSelector:cosine_annealing:T_max" 
+        config["hyperparameters"].pop(idx)
+         
+        config["hyperparameters"].append({
+                "name": "SimpleLearningrateSchedulerSelector:cosine_annealing:T_max",
+                "lower": 1,
+                "upper": 10000,
+                "type": "uniform_int"
+        })
+
+        idx = _find_idx("NetworkSelectorDatasetInfo:darts:init_channels", config["hyperparameters"])
+        assert idx > 0, "Could not find NetworkSelectorDatasetInfo:darts:init_channels" 
+        config["hyperparameters"].pop(idx)
+         
+        config["hyperparameters"].append({
+                "name": "NetworkSelectorDatasetInfo:darts:init_channels",
+                "lower": 1,
+                "upper": 10000,
+                "type": "uniform_int"
+        })
+
+        idx = _find_idx("SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min", config["hyperparameters"])
+        assert idx > 0, "Could not find SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min"
+        config["hyperparameters"].pop(idx)
+
+        config["hyperparameters"].append({
+            "name": "SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min",
+            "lower": 0,
+            "upper": 10000,
+            "type": "uniform_float"
+        })
+
+        config_space = CS.ConfigurationSpace.from_serialized_dict(config)
+
 
         # Override the constant hyperparameters for num_layers, init_channels and
-        config_space._hyperparameters.pop('NetworkSelectorDatasetInfo:darts:layers', None)
-        num_layers = CSH.UniformIntegerHyperparameter(name='NetworkSelectorDatasetInfo:darts:layers', lower=1,
-                                                      upper=10000)
-        config_space._hyperparameters.pop('SimpleLearningrateSchedulerSelector:cosine_annealing:T_max', None)
-        t_max = CSH.UniformIntegerHyperparameter(name='SimpleLearningrateSchedulerSelector:cosine_annealing:T_max',
-                                                 lower=1, upper=10000)
-        config_space._hyperparameters.pop('NetworkSelectorDatasetInfo:darts:init_channels', None)
-        init_channels = CSH.UniformIntegerHyperparameter(name='NetworkSelectorDatasetInfo:darts:init_channels', lower=1,
-                                                         upper=10000)
-        config_space._hyperparameters.pop('SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min', None)
-        eta_min_cosine = CSH.UniformFloatHyperparameter(
-            name='SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min', lower=0, upper=10000)
-
-        config_space.add_hyperparameters([num_layers, t_max, init_channels, eta_min_cosine])
+        #config_space._hyperparameters.pop('NetworkSelectorDatasetInfo:darts:layers', None)
+        # num_layers = CSH.UniformIntegerHyperparameter(name='NetworkSelectorDatasetInfo:darts:layers', lower=1,
+        #                                               upper=10000)
+        # #config_space._hyperparameters.pop('SimpleLearningrateSchedulerSelector:cosine_annealing:T_max', None)
+        # t_max = CSH.UniformIntegerHyperparameter(name='SimpleLearningrateSchedulerSelector:cosine_annealing:T_max',
+        #                                          lower=1, upper=10000)
+        # #config_space._hyperparameters.pop('NetworkSelectorDatasetInfo:darts:init_channels', None)
+        # init_channels = CSH.UniformIntegerHyperparameter(name='NetworkSelectorDatasetInfo:darts:init_channels', lower=1,
+        #                                                  upper=10000)
+        # #config_space._hyperparameters.pop('SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min', None)
+        # eta_min_cosine = CSH.UniformFloatHyperparameter(
+        #     name='SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min', lower=0, upper=10000)
+        #
+        # config_space.add_hyperparameters([num_layers, t_max, init_channels, eta_min_cosine])
         return config_space
 
     def get_config_without_architecture(self, config_instance):

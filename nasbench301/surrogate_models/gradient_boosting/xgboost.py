@@ -7,7 +7,7 @@ import numpy as np
 import xgboost as xgb
 
 from nasbench301.surrogate_models import utils
-from nasbench301.surrogate_models.bananas.bananas_utils import BANANASDataset
+#from nasbench301.surrogate_models.bananas.bananas_utils import BANANASDataset
 from nasbench301.surrogate_models.surrogate_model import SurrogateModel
 
 

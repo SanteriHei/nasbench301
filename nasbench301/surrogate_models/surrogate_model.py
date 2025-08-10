@@ -3,7 +3,6 @@ import logging
 import os
 import sys
 from abc import ABC, abstractmethod
-from IPython import embed
 
 import numpy as np
 import pathvalidate
