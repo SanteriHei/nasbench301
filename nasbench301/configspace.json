@@ -6,7 +6,7 @@
       "log": true,
       "lower": 64,
       "upper": 128,
-      "default": 96
+      "default_value": 96
     },
     {
       "name": "ImageAugmentation:augment",
@@ -14,7 +14,7 @@
       "choices": [
         true
       ],
-      "default": true
+      "default_value": true
     },
     {
       "name": "ImageAugmentation:autoaugment",
@@ -23,7 +23,7 @@
         false,
         true
       ],
-      "default": true
+      "default_value": true
     },
     {
       "name": "ImageAugmentation:cutout",
@@ -31,7 +31,7 @@
       "choices": [
         true
       ],
-      "default": true
+      "default_value": true
     },
     {
       "name": "ImageAugmentation:cutout_holes",
@@ -39,7 +39,7 @@
       "log": false,
       "lower": 1,
       "upper": 3,
-      "default": 1
+      "default_value": 1
     },
     {
       "name": "ImageAugmentation:cutout_length",
@@ -47,7 +47,7 @@
       "log": false,
       "lower": 1,
       "upper": 50,
-      "default": 16
+      "default_value": 16
     },
     {
       "name": "ImageAugmentation:fastautoaugment",
@@ -56,7 +56,7 @@
         false,
         true
       ],
-      "default": false
+      "default_value": false
     },
     {
       "name": "LossModuleSelectorIndices:loss_module",
@@ -64,7 +64,7 @@
       "choices": [
         "cross_entropy"
       ],
-      "default": "cross_entropy"
+      "default_value": "cross_entropy"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:auxiliary",
@@ -72,7 +72,7 @@
       "choices": [
         true
       ],
-      "default": true
+      "default_value": true
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:drop_path_prob",
@@ -91,7 +91,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_1",
@@ -105,7 +105,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_0",
@@ -119,7 +119,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_1",
@@ -133,7 +133,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:init_channels",
@@ -148,7 +148,7 @@
         "0_2",
         "1_2"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:inputs_node_normal_4",
@@ -161,7 +161,7 @@
         "1_3",
         "2_3"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:inputs_node_normal_5",
@@ -178,7 +178,7 @@
         "2_4",
         "3_4"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:inputs_node_reduce_3",
@@ -188,7 +188,7 @@
         "0_2",
         "1_2"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:inputs_node_reduce_4",
@@ -201,7 +201,7 @@
         "1_3",
         "2_3"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:inputs_node_reduce_5",
@@ -218,7 +218,7 @@
         "2_4",
         "3_4"
       ],
-      "default": "0_1"
+      "default_value": "0_1"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:layers",
@@ -231,7 +231,7 @@
       "choices": [
         "darts"
       ],
-      "default": "darts"
+      "default_value": "darts"
     },
     {
       "name": "OptimizerSelector:optimizer",
@@ -239,7 +239,7 @@
       "choices": [
         "sgd"
       ],
-      "default": "sgd"
+      "default_value": "sgd"
     },
     {
       "name": "OptimizerSelector:sgd:learning_rate",
@@ -247,7 +247,9 @@
       "log": true,
       "mu": 0.025,
       "sigma": 0.05,
-      "default": 0.025
+      "lower": 0.01,
+      "upper": 1.0,
+      "default_value": 0.025
     },
     {
       "name": "OptimizerSelector:sgd:momentum",
@@ -255,7 +257,7 @@
       "log": false,
       "lower": 0.1,
       "upper": 0.99,
-      "default": 0.9
+      "default_value": 0.9
     },
     {
       "name": "OptimizerSelector:sgd:weight_decay",
@@ -263,7 +265,9 @@
       "log": true,
       "mu": 0.0003,
       "sigma": 0.0006,
-      "default": 0.0003
+      "lower": 1e-6,
+      "upper": 1.0,
+      "default_value": 0.0003
     },
     {
       "name": "SimpleLearningrateSchedulerSelector:cosine_annealing:T_max",
@@ -271,7 +275,7 @@
       "log": false,
       "lower": 10,
       "upper": 100,
-      "default": 55
+      "default_value": 55
     },
     {
       "name": "SimpleLearningrateSchedulerSelector:cosine_annealing:eta_min",
@@ -279,7 +283,7 @@
       "log": false,
       "lower": 0.0,
       "upper": 2.0,
-      "default": 1e-08
+      "default_value": 1e-08
     },
     {
       "name": "SimpleLearningrateSchedulerSelector:lr_scheduler",
@@ -287,7 +291,7 @@
       "choices": [
         "cosine_annealing"
       ],
-      "default": "cosine_annealing"
+      "default_value": "cosine_annealing"
     },
     {
       "name": "SimpleTrainNode:batch_loss_computation_technique",
@@ -295,7 +299,7 @@
       "choices": [
         "mixup"
       ],
-      "default": "mixup"
+      "default_value": "mixup"
     },
     {
       "name": "SimpleTrainNode:mixup:alpha",
@@ -303,7 +307,7 @@
       "log": true,
       "lower": 0.01,
       "upper": 0.7,
-      "default": 0.2
+      "default_value": 0.2
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_10",
@@ -317,7 +321,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_11",
@@ -331,7 +335,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_12",
@@ -345,7 +349,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_13",
@@ -359,7 +363,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_2",
@@ -373,7 +377,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_3",
@@ -387,7 +391,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_4",
@@ -401,7 +405,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_5",
@@ -415,7 +419,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_6",
@@ -429,7 +433,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_7",
@@ -443,7 +447,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_8",
@@ -457,7 +461,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_normal_9",
@@ -471,7 +475,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_10",
@@ -485,7 +489,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_11",
@@ -499,7 +503,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_12",
@@ -513,7 +517,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_13",
@@ -527,7 +531,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_2",
@@ -541,7 +545,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_3",
@@ -555,7 +559,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_4",
@@ -569,7 +573,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_5",
@@ -583,7 +587,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_6",
@@ -597,7 +601,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_7",
@@ -611,7 +615,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_8",
@@ -625,7 +629,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     },
     {
       "name": "NetworkSelectorDatasetInfo:darts:edge_reduce_9",
@@ -639,7 +643,7 @@
         "dil_conv_3x3",
         "dil_conv_5x5"
       ],
-      "default": "max_pool_3x3"
+      "default_value": "max_pool_3x3"
     }
   ],
   "conditions": [
