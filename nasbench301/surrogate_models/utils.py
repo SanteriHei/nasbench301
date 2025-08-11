@@ -279,8 +279,6 @@ class ConfigLoader:
 
             # json_string = fh.read()
             # config_space = config_space_json_r_w.read(json_string)
-        import pprint
-        pprint.pp(config, indent=4)
         
 
         # Overrride constant hyperparameters for num_layers, init_channels and  annealing
