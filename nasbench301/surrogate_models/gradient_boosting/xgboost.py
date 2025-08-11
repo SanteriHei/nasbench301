@@ -2,7 +2,7 @@ import logging
 import os
 import pickle
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 import xgboost as xgb
 
@@ -60,6 +60,8 @@ class XGBModel(SurrogateModel):
         return param_config
 
     def train(self):
+        import matplotlib.pyplot as p
+        import matplotlib.pyplot as plt
         X_train, y_train, _ = self.load_results_from_result_paths(self.train_paths)
         X_val, y_val, _ = self.load_results_from_result_paths(self.val_paths)
 
@@ -97,6 +99,7 @@ class XGBModel(SurrogateModel):
         return valid_metrics
 
     def test(self):
+        import matplotlib.pyplot as plt
         X_test, y_test, _ = self.load_results_from_result_paths(self.test_paths)
         dtest = xgb.DMatrix(X_test, label=y_test)
         test_pred, var_test = self.model.predict(dtest), None
@@ -123,10 +126,15 @@ class XGBModel(SurrogateModel):
         return valid_metrics
 
     def save(self):
-        pickle.dump(self.model, open(os.path.join(self.log_dir, 'surrogate_model.model'), 'wb'))
+        # Save using universal binary json thingy
+        self.model.save_model(os.path.join(self.log_dir, "surrogate_model.ubj"))
+        #pickle.dump(self.model, open(os.path.join(self.log_dir, 'surrogate_model.model'), 'wb'))
 
     def load(self, model_path):
-        self.model = pickle.load(open(model_path, 'rb'))
+        model = xgb.Booster()
+        model.load_model(model_path)
+        self.model = model
+        #self.model = pickle.load(open(model_path, 'rb'))
 
     def evaluate(self, result_paths):
         X_test, y_test, _ = self.load_results_from_result_paths(result_paths)

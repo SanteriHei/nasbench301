@@ -110,14 +110,16 @@ class BaggingEnsemble(AbstractEnsemble):
         # Get member directories
         if isinstance(model_paths, list):
             self.member_logdirs = model_paths
-        if isinstance(model_paths, str) and model_paths.endswith('.model'): # compatibility with loading from /surrogate_model.model
+        if isinstance(model_paths, str) and model_paths.endswith('.ubj'): # compatibility with loading from /surrogate_model.ubj
             self.member_logdirs = [p for p in os.listdir(os.path.dirname(model_paths)) if os.path.isdir(p)]
+        # if isinstance(model_paths, str) and model_paths.endswith('.model'): # compatibility with loading from /surrogate_model.model
+        #     self.member_logdirs = [p for p in os.listdir(os.path.dirname(model_paths)) if os.path.isdir(p)]
         
         # Load ensemble members
         self.ensemble_members = []
         for ind, member_logdir in enumerate(self.member_logdirs):
             ens_mem = utils.model_dict[self.member_model_name](log_dir=None, seed=self.starting_seed+ind, **self.member_model_init_dict)
-            ens_mem.load(os.path.join(member_logdir, 'surrogate_model.model'))
+            ens_mem.load(os.path.join(member_logdir, 'surrogate_model.ubj'))
             ens_mem.train_paths = train_paths
             ens_mem.val_paths = val_paths
             ens_mem.test_paths = test_paths

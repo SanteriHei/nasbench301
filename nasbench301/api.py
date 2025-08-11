@@ -1,6 +1,6 @@
 import os
 import json
-from pathlib import Path
+import pathlib
 
 from nasbench301 import representations
 from nasbench301.surrogate_models import utils
@@ -39,8 +39,7 @@ def load_ensemble(ensemble_parent_directory):
     args:
         ensemble_parent_directory: directory which contains the ensemble members. Members must be the same model type
     """
-
-    ensemble_member_dirs = [os.path.dirname(filename) for filename in Path(ensemble_parent_directory).rglob('*surrogate_model.model')]
+    ensemble_member_dirs = [os.path.dirname(filename) for filename in pathlib.Path(ensemble_parent_directory).rglob('*surrogate_model.model')]
     data_config = json.load(open(os.path.join(ensemble_member_dirs[0], 'data_config.json'), 'r'))
     model_config = json.load(open(os.path.join(ensemble_member_dirs[0], 'model_config.json'), 'r'))
 

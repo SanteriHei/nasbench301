@@ -4,7 +4,7 @@ import pickle
 
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 from nasbench301.surrogate_models import utils
 from nasbench301.surrogate_models.surrogate_model import SurrogateModel
@@ -46,6 +46,7 @@ class SklearnForest(SurrogateModel):
         return X, y, test_accuracies
 
     def train(self):
+        import matplotlib.pyplot as plt
         X_train, y_train, _ = self.load_results_from_result_paths(self.train_paths)
         X_val, y_val, _ = self.load_results_from_result_paths(self.val_paths)
         self.model.fit(X_train, y_train)
@@ -72,6 +73,7 @@ class SklearnForest(SurrogateModel):
         return valid_metrics
 
     def test(self):
+        import matplotlib.pyplot as plt
         X_test, y_test, _ = self.load_results_from_result_paths(self.test_paths)
         test_pred, var_test = self.model.predict(X_test), None
 

@@ -8,9 +8,7 @@ from math import isclose
 
 import ConfigSpace as CS
 import ConfigSpace.hyperparameters as CSH
-import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
 from ConfigSpace.read_and_write import json as config_space_json_r_w
 from scipy.stats import norm, spearmanr, kendalltau
 from sklearn.metrics import mean_squared_error, r2_score
@@ -24,7 +22,6 @@ from nasbench301.surrogate_models.random_forrest.sklearn_forest import SklearnFo
 from nasbench301.surrogate_models.svr.nu_svr import NuSVR
 from nasbench301.surrogate_models.svr.svr import SVR
 
-sns.set_style('whitegrid')
 
 model_dict = {
 
@@ -596,6 +593,8 @@ def scatter_plot(xs, ys, xlabel, ylabel, title):
     :param title:
     :return:
     """
+    import matplotlib.pyplot as plt
+
     fig = plt.figure(figsize=(4, 3))
     plt.tight_layout()
     plt.grid(True, which='both', ls='-', alpha=0.5)
@@ -611,6 +610,7 @@ def scatter_plot(xs, ys, xlabel, ylabel, title):
 
 def plot_predictions(mu_train, mu_test, var_train, var_test, train_y, test_y,
                      log_dir, name='random forest', x1=0, x2=100, y1=0, y2=100):
+    import matplotlib.pyplot as plt
     f, ax = plt.subplots(1, 2, figsize=(15, 6))
 
     if var_train is not None:

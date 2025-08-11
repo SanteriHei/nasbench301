@@ -5,6 +5,20 @@ This repository containts code for the paper: ["NAS-Bench-301 and the Case for S
 The surrogate models can be downloaded on figshare. This includes the models for [v0.9](https://figshare.com/articles/software/nasbench301_models_v0_9_zip/12962432) and [v1.0](https://figshare.com/articles/software/nasbench301_models_v1_0_zip/13061510) as well as the [dataset](https://figshare.com/articles/dataset/NAS-Bench-301_Dataset_v1_0/13246952) that was used to train the surrogate models. We also provide the [full training logs](https://figshare.com/articles/dataset/nasbench301_full_data/13286105) for all architectures, which include learning curves on the train, validation and test sets. These can
 be automatically downloaded, please see `nasbench301/example.py`.
 
+NOTE: The models have been trained using XGBoost model 1.1.0, and saved using
+"memory snapshot", which is not compatible with newer XGBoost versions. To fix  
+this, do the following:
+
+1. Install python 3.7 and XGBoost 1.1.0
+2. Load each model via pickle (i.e ``model = pickle.load(fp)``)
+3. Save model as json (i.e. ``model.save_model('path/to/dir/model.json')``)
+4. Create environment with desired python and XGBoost version (< 2.3)
+5. Load the JSON models & save them using as '.ubj' binary format which is
+   stable.
+6. Enjoy!
+
+
+
 To install all requirements (this may take a few minutes), run
 
 ```sh

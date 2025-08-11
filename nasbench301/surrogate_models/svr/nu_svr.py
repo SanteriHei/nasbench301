@@ -4,7 +4,6 @@ import pickle
 
 import numpy as np
 from sklearn.svm import NuSVR as sklearn_NuSVR
-import matplotlib.pyplot as plt
 
 from nasbench301.surrogate_models import utils
 from nasbench301.surrogate_models.svr.svr import SVR
@@ -20,6 +19,7 @@ class NuSVR(SVR):
 
     def train(self):
 
+        import matplotlib.pyplot as plt
         from nasbench301.surrogate_models import utils
         X_train, y_train, _ = self.load_results_from_result_paths(self.train_paths)
         X_val, y_val, _ = self.load_results_from_result_paths(self.val_paths)
@@ -47,6 +47,7 @@ class NuSVR(SVR):
         return valid_metrics
 
     def test(self):
+        import matplotlib.pyplot as plt
         from nasbench301.surrogate_models import utils
         X_test, y_test, _ = self.load_results_from_result_paths(self.test_paths)
         test_pred, var_test = self.model.predict(X_test), None

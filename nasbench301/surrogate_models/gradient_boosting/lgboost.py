@@ -1,9 +1,10 @@
 import logging
 import os
+import pathlib
 import pickle
 
 import lightgbm as lgb
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 
 from nasbench301.surrogate_models import utils
@@ -60,6 +61,7 @@ class LGBModel(SurrogateModel):
         return param_config
 
     def train(self):
+        import matplotlib.pyplot as plt
         X_train, y_train, _ = self.load_results_from_result_paths(self.train_paths)
         X_val, y_val, _ = self.load_results_from_result_paths(self.val_paths)
 
@@ -127,6 +129,9 @@ class LGBModel(SurrogateModel):
         pickle.dump(self.model, open(os.path.join(self.log_dir, 'surrogate_model.model'), 'wb'))
 
     def load(self, model_path):
+        model_path = pathlib.Path(model_path)
+        if model_path.suffix == ".ubj":
+            model_path = model_path.with_suffix(".model")
         self.model = pickle.load(open(model_path, 'rb'))
 
     def evaluate(self, result_paths):

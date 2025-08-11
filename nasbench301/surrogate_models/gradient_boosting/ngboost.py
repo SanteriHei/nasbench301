@@ -2,7 +2,7 @@ import logging
 import os
 import pickle
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 from ngboost import NGBRegressor
 from ngboost.distns import Normal
@@ -56,6 +56,7 @@ class NGBModel(SurrogateModel):
         return param_config
 
     def train(self):
+        import matplotlib.pyplot as plt
         X_train, y_train, _ = self.load_results_from_result_paths(self.train_paths)
         X_val, y_val, _ = self.load_results_from_result_paths(self.val_paths)
 
@@ -92,6 +93,7 @@ class NGBModel(SurrogateModel):
         return valid_metrics
 
     def test(self):
+        import matplotlib.pyplot as plt
         X_test, y_test, _ = self.load_results_from_result_paths(self.test_paths)
         test_pred, var_test = self.model.predict(X_test), None
 
