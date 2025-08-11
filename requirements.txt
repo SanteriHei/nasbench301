@@ -3,7 +3,7 @@ ConfigSpace
 fasteners
 imblearn
 lightgbm>=2.3.1
-matplotlib
+#matplotlib
 #netifaces
 numpy
 pandas
@@ -15,7 +15,7 @@ pynisher<0.7.0
 scikit-image
 scipy
 scikit-learn
-seaborn
+#seaborn
 setuptools
 serpent
 statsmodels
